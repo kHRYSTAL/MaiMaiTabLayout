@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MaiMaiTabLayout">
+        <attr name="indicatorColor" format="color" />
+        <attr name="underlineColor" format="color" />
+        <attr name="dividerColor" format="color" />
+        <attr name="indicatorHeight" format="dimension" />
+        <attr name="underlineHeight" format="dimension" />
+        <attr name="dividerPaddingTopBottom" format="dimension" />
+        <attr name="tabPaddingLeftRight" format="dimension" />
+        <attr name="scrollOffset" format="dimension" />
+        <attr name="tabBackground" format="reference" />
+        <!--该属性表示里面的TAB是否均分整个PagerSlidingTabStrip控件的宽,true是,false不均分,从左到右排列,默认false-->
+        <attr name="shouldExpand" format="boolean" />
+        <attr name="allCaps" format="boolean" />
+        <attr name="textSelectedColor" format="color" />
+        <!--缩放的最大值,0.3表示放大后最大是原来的0.3倍,默认未0.3-->
+        <attr name="scaleZoomMax" format="float" />
+        <attr name="smoothScrollWhenClickTab" format="boolean" />
+        <!-- 宽为match_parent ，指示器的宽需手动计算的问题,这个属性设置为true,则指示器的位置和字体的宽一样-->
+        <!--    <attr name="IndicatorWrap" format="boolean" />-->
+        <!-- 未选择时字体样式 -->
+        <attr name="tabTextColor" format="color" />
+        <!-- 已选择时字体样式 -->
+        <attr name="selectedTabTextColor" format="color" />
+        <!-- 默认字体大小 -->
+        <attr name="tabTextSize" format="dimension" />
+    </declare-styleable>
+</resources>
