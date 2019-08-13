@@ -13,7 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -36,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        VPA vpa = new VPA(new ArrayList<String>() {
+        SamplePagerAdapter vpa = new SamplePagerAdapter(new ArrayList<String>() {
             {
                 this.add("好友");
                 this.add("关注");
@@ -68,15 +67,21 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     public void onOffsetChanged(AppBarLayout appBarLayout, int offset) {
         // 在 xml 中设置了最大偏移量是15dp(xhdpi 45px) tabLayout缩放比例最大为getZoomMax 0.4
         // 则 zoom / offset = 0.4 / 45px
-        float zoom = Math.abs(offset) * tabLayout.getZoomMax() / dip2px(MainActivity.this, 15);
+        float offsetMax;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            offsetMax = tabLayout.getHeight() - tabLayout.getMinimumHeight();
+        } else {
+            offsetMax = dip2px(MainActivity.this, 15);
+        }
+        float zoom = Math.abs(offset) * tabLayout.getZoomMax() / offsetMax;
         tabLayout.updateSelectTabScale(zoom);
     }
 
-    class VPA extends PagerAdapter {
+    class SamplePagerAdapter extends PagerAdapter {
 
         private List<String> titles;
 
-        public VPA(List<String> titles) {
+        public SamplePagerAdapter(List<String> titles) {
             this.titles = titles;
         }
 
