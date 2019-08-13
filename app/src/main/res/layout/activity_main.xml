@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
+        app:layout_behavior="@string/maimai_fling_behavior"
         app:elevation="0dp">
 
         <me.khrystal.widget.tablayout.MaiMaiTabLayout
