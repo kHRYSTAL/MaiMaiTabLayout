@@ -239,19 +239,7 @@ public class MaiMaiTabLayout extends HorizontalScrollView {
 
             @Override
             public void onSingleTapConfirmed(MotionEvent e) {
-                mFadeEnabled = false;
-                selectedPosition = position;
-                //set old view statue
-                tabViews.get(oldPosition).setTextColor(tabTextColor);
-                tabViews.get(oldPosition).setTextSize(TypedValue.COMPLEX_UNIT_PX, tabTextSize);
-
-                //set new view statue
-                tabViews.get(position).setTextColor(selectedTabTextColor);
-                tabViews.get(position).setTextSize(TypedValue.COMPLEX_UNIT_PX, tabTextSize * (1 + zoomMax));
-                oldPosition = selectedPosition;
-                pager.setCurrentItem(position, smoothScrollWhenClickTab);
-                currentPosition = position;
-                scrollToChild(position, 0);//滚动HorizontalScrollView
+                changeSelectPosition(position);
                 //cb
                 if (mOnPagerTitleItemClickListener != null) {
                     mOnPagerTitleItemClickListener.onSingleClickItem(position);
@@ -261,6 +249,22 @@ public class MaiMaiTabLayout extends HorizontalScrollView {
         });
         ((TextView) tab).setTextColor(tabTextColor);
         tabViews.add(position, (TextView) tab);
+    }
+
+    private void changeSelectPosition(int position) {
+        mFadeEnabled = false;
+        selectedPosition = position;
+        //set old view statue
+        tabViews.get(oldPosition).setTextColor(tabTextColor);
+        tabViews.get(oldPosition).setTextSize(TypedValue.COMPLEX_UNIT_PX, tabTextSize);
+
+        //set new view statue
+        tabViews.get(position).setTextColor(selectedTabTextColor);
+        tabViews.get(position).setTextSize(TypedValue.COMPLEX_UNIT_PX, tabTextSize * (1 + zoomMax));
+        oldPosition = selectedPosition;
+        pager.setCurrentItem(position, smoothScrollWhenClickTab);
+        currentPosition = position;
+        scrollToChild(position, 0);//滚动HorizontalScrollView
     }
 
     private void updateTabStyles() {
@@ -411,6 +415,11 @@ public class MaiMaiTabLayout extends HorizontalScrollView {
             }
             oldPosition = selectedPosition;
         }
+    }
+
+    // use method replace viewpager#setCurrentItem(position)
+    public void select(int position) {
+        changeSelectPosition(position);
     }
 
     public void setIndicatorColor(int indicatorColor) {
